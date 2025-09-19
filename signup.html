@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container my-5">
+  <h2 class="text-center mb-4">Signup</h2>
+  <form id="signup-form" class="w-50 mx-auto">
+    <div class="mb-3">
+      <label for="signup-username" class="form-label">Username</label>
+      <input type="text" id="signup-username" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label for="signup-password" class="form-label">Password</label>
+      <input type="password" id="signup-password" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-success w-100">Signup</button>
+  </form>
+</div>
+{% endblock %}

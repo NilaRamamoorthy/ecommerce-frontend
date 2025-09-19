@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container my-5">
+  <h2 class="text-center mb-4">Featured Products</h2>
+  <div id="productContainer" class="row"></div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  loadProducts("productContainer", 6); // show first 6
+});
+</script>
+{% endblock %}

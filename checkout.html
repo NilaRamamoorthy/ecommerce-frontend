@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Checkout</h2>
+  <form id="payment-form">
+    <div class="mb-3">
+      <label>Card Number</label>
+      <input type="text" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label>Expiry Date</label>
+      <input type="text" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label>CVV</label>
+      <input type="text" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-success">Pay Now</button>
+  </form>
+{% endblock %}
