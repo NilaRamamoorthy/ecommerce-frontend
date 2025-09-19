@@ -1,13 +1,23 @@
-{% extends "base.html" %}
-{% block content %}
-<div class="container my-5">
-  <h2 class="text-center mb-4">Featured Products</h2>
-  <div id="productContainer" class="row"></div>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>E-Shop - Home</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div id="header"></div>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  loadProducts("productContainer", 6); // show first 6
-});
-</script>
-{% endblock %}
+  <div class="container my-5">
+    <h2 class="text-center mb-4">Featured Products</h2>
+    <div class="row" id="products-container"></div>
+  </div>
+
+  <div id="footer"></div>
+
+  <script src="js/main.js"></script>
+  <script>
+    loadProducts("products-container", 6); // Load 6 featured products
+  </script>
+</body>
+</html>

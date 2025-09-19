@@ -1,110 +1,23 @@
-{% extends "base.html" %}
-{% block content %}
-<div class="container my-5">
-  <h2 class="text-center mb-4">My Cart</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Cart - E-Shop</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div id="header"></div>
 
-  <div id="cartItems" class="row"></div>
-
-  <div class="mt-4 text-end">
-    <h4>Total: $<span id="cartTotal">0.00</span></h4>
-    <button id="checkoutBtn" class="btn btn-success">Proceed to Checkout</button>
+  <div class="container my-5">
+    <h2 class="text-center mb-4">My Cart</h2>
+    <div id="cartItems" class="row"></div>
+    <div class="mt-4 text-end">
+      <h4>Total: $<span id="cartTotal">0.00</span></h4>
+      <button id="checkoutBtn" class="btn btn-success">Proceed to Checkout</button>
+    </div>
   </div>
-</div>
 
-<script>
-const apiBase = "https://ecommerce-backend-2-qntk.onrender.com/api/";
-const token = localStorage.getItem("access_token"); // use same key as main.js
-
-// Redirect to login if not logged in
-if (!token) {
-  alert("Please login to view your cart.");
-  window.location.href = "login.html";
-}
-
-// Fetch and render cart
-async function fetchCart() {
-  try {
-    const res = await fetch(`${apiBase}orders/cart/`, {
-      headers: { "Authorization": `Bearer ${token}` }
-    });
-    if (!res.ok) throw new Error("Failed to fetch cart");
-    const cart = await res.json();
-    renderCart(cart);
-  } catch (err) {
-    document.getElementById("cartItems").innerHTML = "<p>Your cart is empty.</p>";
-    document.getElementById("cartTotal").textContent = "0.00";
-  }
-}
-
-function renderCart(cart) {
-  const container = document.getElementById("cartItems");
-  container.innerHTML = "";
-  let total = 0;
-
-  cart.items.forEach(item => {
-    const imageUrl = item.product.image.startsWith("http")
-      ? item.product.image
-      : apiBase.replace("/api/", "") + item.product.image;
-
-    total += item.product.price * item.quantity;
-
-    container.innerHTML += `
-      <div class="col-md-6 mb-3">
-        <div class="card">
-          <div class="row g-0">
-            <div class="col-md-4">
-              <img src="${imageUrl}" class="img-fluid rounded-start" alt="${item.product.name}">
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title">${item.product.name}</h5>
-                <p class="card-text">Quantity: ${item.quantity}</p>
-                <p class="card-text">$${item.product.price}</p>
-                <button class="btn btn-danger btn-sm" onclick="removeFromCart(${item.product.id})">Remove</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>`;
-  });
-
-  document.getElementById("cartTotal").textContent = total.toFixed(2);
-}
-
-// Remove item from cart
-async function removeFromCart(productId) {
-  try {
-    const res = await fetch(`${apiBase}orders/cart/remove/`, {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${token}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ product_id: productId })
-    });
-    if (!res.ok) throw new Error("Remove failed");
-    fetchCart();
-  } catch (err) {
-    alert("Failed to remove item");
-  }
-}
-
-// Checkout
-document.getElementById("checkoutBtn").addEventListener("click", async () => {
-  try {
-    const res = await fetch(`${apiBase}orders/checkout/`, {
-      method: "POST",
-      headers: { "Authorization": `Bearer ${token}` }
-    });
-    if (!res.ok) throw new Error("Checkout failed");
-    alert("✅ Order placed successfully!");
-    window.location.href = "orders.html";
-  } catch (err) {
-    alert("❌ Failed to checkout.");
-  }
-});
-
-// Initialize
-fetchCart();
-</script>
-{% endblock %}
+  <div id="footer"></div>
+  <script src="js/main.js"></script>
+</body>
+</html>
