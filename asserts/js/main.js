@@ -1,5 +1,5 @@
 // ====================== CONFIG ======================
-const backendUrl = "https://ecommerce-backend-2-qntk.onrender.com/api/";
+const backendUrl = "https://ecommerce-backend-4-ndkf.onrender.com/api/";
 
 // ==================== HEADER & FOOTER ====================
 document.addEventListener("DOMContentLoaded", () => {
